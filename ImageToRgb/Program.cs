@@ -18,7 +18,8 @@ namespace dotnet_tracer_AnalysisExample
                 command = Console.ReadLine();
                 if (command.ToUpper() == "RGB")
                 {
-                    var rgb = new StringBuilder();
+                    Console.WriteLine("Convertion Started");
+                    var rgb = "";
                     using (FileStream stream = new FileStream(@"Resources/spiderpig.jpg", FileMode.Open))
                     using (var image = new Bitmap(stream))
                     {
@@ -29,11 +30,13 @@ namespace dotnet_tracer_AnalysisExample
                                 var R = image.GetPixel(i, j).R;
                                 var G = image.GetPixel(i, j).G;
                                 var B = image.GetPixel(i, j).B;
-                                rgb.Append(R + " " + G + " " + B + ";");
+                                rgb += R + " " + G + " " + B + ";";
                             }
                         }
                     }
-                    File.WriteAllText(@"Resources/spiderpig_output.txt", rgb.ToString());
+                    File.WriteAllText(@"Resources/spiderpig_output.txt", rgb);
+                    Console.WriteLine("Finished convertion");
+                    shouldRun = false;
                 }
                 else
                 {
