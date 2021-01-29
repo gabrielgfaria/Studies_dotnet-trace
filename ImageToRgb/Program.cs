@@ -21,7 +21,7 @@ namespace dotnet_tracer_AnalysisExample
                 {
                     var time = Stopwatch.StartNew();
                     Console.WriteLine("Convertion Started");
-                    var rgb = new StringBuilder();
+                    var rgb = "";
                     using (FileStream stream = new FileStream(@"Resources/spiderpig.jpg", FileMode.Open))
                     using (var image = new Bitmap(stream))
                     {
@@ -32,11 +32,11 @@ namespace dotnet_tracer_AnalysisExample
                                 var R = image.GetPixel(i, j).R;
                                 var G = image.GetPixel(i, j).G;
                                 var B = image.GetPixel(i, j).B;
-                                rgb.Append(R + " " + G + " " + B + ";");
+                                rgb += R + " " + G + " " + B + ";";
                             }
                         }
                     }
-                    File.WriteAllText(@"Resources/spiderpig_output.txt", rgb.ToString());
+                    File.WriteAllText(@"Resources/spiderpig_output.txt", rgb);
                     time.Stop();
                     var elapsedMs = time.ElapsedMilliseconds; ;
                     Console.WriteLine($"Finished convertion in {elapsedMs} milliseconds");
