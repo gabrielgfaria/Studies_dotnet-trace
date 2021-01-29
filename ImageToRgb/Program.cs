@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -18,6 +19,7 @@ namespace dotnet_tracer_AnalysisExample
                 command = Console.ReadLine();
                 if (command.ToUpper() == "RGB")
                 {
+                    var time = Stopwatch.StartNew();
                     Console.WriteLine("Convertion Started");
                     var rgb = new StringBuilder();
                     using (FileStream stream = new FileStream(@"Resources/spiderpig.jpg", FileMode.Open))
@@ -35,7 +37,9 @@ namespace dotnet_tracer_AnalysisExample
                         }
                     }
                     File.WriteAllText(@"Resources/spiderpig_output.txt", rgb.ToString());
-                    Console.WriteLine("Finished convertion");
+                    time.Stop();
+                    var elapsedMs = time.ElapsedMilliseconds; ;
+                    Console.WriteLine($"Finished convertion in {elapsedMs} milliseconds");
                     shouldRun = false;
                 }
                 else
